@@ -98,7 +98,7 @@
             overflow-x: hidden; 
         }
         body.menu-open { overflow: hidden; }
-        img { max-width: 100%; display: block; }
+        img { max-width: 100%; display: block; object-fit: cover; }
         a { text-decoration: none; color: inherit; transition: var(--transition-smooth); cursor: pointer; }
         h1, h2, h3, h4, h5 { font-family: 'Syne', sans-serif; line-height: 1.15; letter-spacing: -0.5px; }
         ::selection { background: var(--primary-blue); color: var(--white); }
@@ -141,6 +141,19 @@
         .loader-bar { width: 120px; height: 2px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; margin: 0 auto;}
         .loader-progress { width: 0; height: 100%; background: var(--gold); border-radius: 2px; animation: loadProgress 1.5s ease forwards; }
         @keyframes loadProgress { 0% { width: 0; } 100% { width: 100%; } }
+
+        /* Image Overlays */
+        .hero-bg-image {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+            opacity: 0.18; mix-blend-mode: overlay; z-index: 0; pointer-events: none;
+            filter: grayscale(40%);
+        }
+        .dark-bg-image {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+            opacity: 0.1; mix-blend-mode: luminosity; z-index: 0; pointer-events: none;
+        }
 
         /* Noise/Grain Texture Overlay */
         .grain-overlay {
@@ -430,18 +443,20 @@
         @keyframes marqueeScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* Positioning Section */
-        .positioning-section { background: var(--off-white); padding: 120px 24px; }
-        .positioning-content { text-align: center; }
+        .positioning-section { background: var(--off-white); padding: 140px 24px; position: relative; overflow: hidden;}
+        .pos-bg-img-1 { position: absolute; width: 300px; height: 400px; object-fit: cover; border-radius: var(--radius-lg); opacity: 0.15; left: -100px; top: 10%; transform: rotate(-5deg); pointer-events: none;}
+        .pos-bg-img-2 { position: absolute; width: 350px; height: 250px; object-fit: cover; border-radius: var(--radius-lg); opacity: 0.15; right: -80px; bottom: 10%; transform: rotate(8deg); pointer-events: none;}
+        .positioning-content { text-align: center; position: relative; z-index: 2;}
         .pos-gold-line { width: 50px; height: 1.5px; background: var(--gold); margin: 0 auto 32px; }
         .pos-gold-line:last-child { margin: 32px auto 0; }
-        .positioning-quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(20px, 3vw, 28px); color: var(--text-primary); line-height: 1.7; max-width: 700px; margin: 0 auto; }
+        .positioning-quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(22px, 3vw, 32px); color: var(--text-primary); line-height: 1.7; max-width: 750px; margin: 0 auto; }
         .positioning-quote em { color: var(--primary-blue); font-style: italic; }
 
         /* What We Do Grid */
         .what-we-do-section { background: var(--white); padding: 140px 0; }
         .wwd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 64px;}
         .wwd-card { background: var(--off-white); padding: 44px 36px 40px; border-radius: var(--radius-md); border: 1px solid var(--border-light); position: relative; overflow: hidden; transition: var(--transition-smooth); }
-        .wwd-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: rgba(36, 58, 188, 0.15); }
+        .wwd-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: rgba(36, 58, 188, 0.15); background: white;}
         .wwd-card-number { font-family: 'Syne'; font-weight: 800; font-size: 72px; color: var(--light-gray); position: absolute; top: -8px; right: 16px; line-height: 1; opacity: 0.5; }
         .wwd-card-icon { margin-bottom: 24px; }
         .wwd-card h3 { font-family: 'Syne'; font-weight: 700; font-size: 24px; color: var(--text-primary); margin-bottom: 16px; }
@@ -453,8 +468,13 @@
         .wwd-card:hover .wwd-card-bottom-line { width: 100%; }
 
         /* Stats Strip */
-        .stats-section { background: var(--dark-bg-secondary); padding: 100px 0; position: relative; overflow: hidden; }
-        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center; }
+        .stats-section { background: var(--dark-bg-secondary); padding: 120px 0; position: relative; overflow: hidden; }
+        .stats-bg-img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover; background-position: center; opacity: 0.1; mix-blend-mode: luminosity; z-index: 0;
+        }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center; position: relative; z-index: 2;}
         .stat-number { font-family: 'Syne'; font-weight: 800; font-size: clamp(36px, 4vw, 52px); color: var(--white); display: inline; }
         .stat-plus { font-family: 'Syne'; font-weight: 800; font-size: clamp(28px, 3vw, 40px); color: var(--gold); }
         .stat-label { display: block; font-family: 'Inter'; font-weight: 600; font-size: 14px; color: rgba(255,255,255,0.7); margin-top: 8px; letter-spacing: 0.3px; }
@@ -482,10 +502,16 @@
         .sbp-stat-text { font-size: 13px; color: var(--text-secondary); line-height: 1.5; display: block; margin-top: 2px; }
         .sbp-visual-container { position: relative; width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; }
         .sbp-circle { position: absolute; border-radius: 50%; }
-        .sbp-circle-1 { width: 300px; height: 300px; background: var(--pink-bg-medium); top: 10%; left: 10%; animation: orbFloat 8s ease-in-out infinite alternate; }
-        .sbp-circle-2 { width: 180px; height: 180px; border: 1.5px solid var(--pink-light); bottom: 15%; right: 10%; animation: orbFloat 10s ease-in-out infinite alternate-reverse; }
+        .sbp-circle-1 { 
+            width: 320px; height: 320px; 
+            background-image: url('https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+            background-size: cover; background-position: center top;
+            box-shadow: inset 0 0 0 2000px rgba(212, 132, 154, 0.1), var(--shadow-lg);
+            top: 10%; left: 10%; animation: orbFloat 8s ease-in-out infinite alternate; 
+        }
+        .sbp-circle-2 { width: 180px; height: 180px; border: 1.5px solid var(--pink-light); bottom: 10%; right: 15%; animation: orbFloat 10s ease-in-out infinite alternate-reverse; }
         .sbp-circle-3 { width: 100px; height: 100px; background: var(--gold-light); top: 5%; right: 25%; border-radius: 50%; animation: orbFloat 12s ease-in-out infinite alternate; }
-        .sbp-quote-card { position: relative; z-index: 2; background: var(--white); padding: 32px 40px; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); border: 1px solid var(--pink-light); }
+        .sbp-quote-card { position: relative; z-index: 2; background: var(--white); padding: 32px 40px; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); border: 1px solid var(--pink-light); top: 60px; right: -20px;}
         .sbp-quote-card p { font-family: 'Playfair Display'; font-style: italic; font-size: 20px; color: var(--pink); text-align: center; }
 
         /* Process Timeline */
@@ -502,9 +528,15 @@
         .step-tags span { font-size: 11.5px; font-family: 'Inter'; font-weight: 500; color: var(--primary-blue); background: var(--primary-blue-light); padding: 6px 14px; border-radius: var(--radius-full); letter-spacing: 0.3px; }
 
         /* Brand Manifesto */
-        .manifesto-section { background: var(--dark-bg); padding: 140px 0; position: relative; overflow: hidden; text-align: center; }
+        .manifesto-section { background: var(--dark-bg); padding: 160px 0; position: relative; overflow: hidden; text-align: center; }
+        .manifesto-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover; background-position: center; opacity: 0.15; mix-blend-mode: overlay; z-index: 0;
+        }
+        .manifesto-content { position: relative; z-index: 2; }
         .manifesto-text { max-width: 750px; margin: 0 auto; }
-        .manifesto-text p { font-family: 'Playfair Display', serif; font-size: clamp(20px, 2.8vw, 28px); color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 28px; }
+        .manifesto-text p { font-family: 'Playfair Display', serif; font-size: clamp(20px, 2.8vw, 28px); color: rgba(255,255,255,0.85); line-height: 1.8; margin-bottom: 28px; }
         .manifesto-text em { color: var(--gold); font-style: italic; }
         .manifesto-closer { font-family: 'Syne' !important; font-weight: 700 !important; font-size: clamp(22px, 3vw, 32px) !important; color: var(--white) !important; margin-top: 48px !important; font-style: normal !important; }
 
@@ -524,9 +556,18 @@
         .origin-layout { display: grid; grid-template-columns: 55% 45%; gap: 60px; align-items: center;}
         .origin-text p { margin-bottom: 24px; color: var(--text-secondary); }
         .origin-quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 24px; color: var(--primary-blue); border-left: 4px solid var(--gold); padding-left: 24px; margin: 40px 0; }
-        .origin-visual { background: linear-gradient(135deg, var(--off-white), white); border: 1px solid var(--gold-light); border-radius: 40px; transform: rotate(3deg); height: 100%; min-height: 450px; box-shadow: var(--shadow-sm); position: relative; overflow: hidden;}
+        .origin-visual { 
+            background-image: url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');
+            background-size: cover; background-position: center;
+            border: 1px solid var(--gold-light); border-radius: 40px; transform: rotate(3deg); height: 100%; min-height: 450px; box-shadow: var(--shadow-md); position: relative; overflow: hidden;
+        }
+        .origin-visual-overlay {
+            position: absolute; top:0; left:0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(36, 58, 188, 0.2), rgba(200, 168, 78, 0.1));
+            mix-blend-mode: multiply; pointer-events: none;
+        }
         
-        .mission-vision-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .mission-vision-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; position: relative; z-index: 2;}
         .mv-card { padding: 60px 48px; border-radius: var(--radius-lg); background: var(--white); box-shadow: var(--shadow-md); border-top: 4px solid transparent; }
         .mv-card.mission { border-top-color: var(--primary-blue); }
         .mv-card.vision { border-top-color: var(--gold); }
@@ -534,15 +575,16 @@
         .mv-card p { font-size: 17px; line-height: 1.8; color: var(--text-secondary); font-weight: 500;}
 
         .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 60px;}
-        .value-card { padding: 40px 32px; background: var(--white); border-radius: var(--radius-md); border: 1px solid var(--border-light); }
+        .value-card { padding: 40px 32px; background: var(--white); border-radius: var(--radius-md); border: 1px solid var(--border-light); transition: var(--transition-smooth); }
+        .value-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: rgba(36, 58, 188, 0.15);}
         .value-number { font-family: 'Syne'; font-weight: 800; font-size: 48px; color: var(--light-gray); opacity: 0.5; line-height: 1; margin-bottom: 16px;}
-        .value-card h4 { font-size: 20px; margin-bottom: 12px; }
+        .value-card h4 { font-size: 20px; margin-bottom: 12px; color: var(--text-primary);}
         .value-card p { font-size: 14.5px; color: var(--text-secondary); line-height: 1.7; }
 
         /* ==========================================================================
            8. PAGE STYLES - SERVICES
            ========================================================================== */
-        .philosophy-strip { background: var(--off-white); padding: 80px 24px; text-align: center; }
+        .philosophy-strip { background: var(--off-white); padding: 100px 24px; text-align: center; }
         .philosophy-quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(22px, 3vw, 32px); color: var(--text-primary); max-width: 800px; margin: 0 auto; line-height: 1.6;}
         
         .service-block { padding: 120px 0; border-bottom: 1px solid var(--border-light); }
@@ -563,7 +605,7 @@
            ========================================================================== */
         .sb-hero { background: linear-gradient(135deg, #1A0A10 0%, #2A1520 40%, #1A0A10 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; text-align: center;}
         .sb-hero-title { font-family: 'Syne'; font-weight: 800; font-size: clamp(56px, 10vw, 110px); color: white; letter-spacing: -4px; margin-bottom: 24px;}
-        .sb-hero-subtitle { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(18px, 2.5vw, 24px); color: rgba(255,255,255,0.6); max-width: 700px; margin: 0 auto; line-height: 1.6;}
+        .sb-hero-subtitle { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(18px, 2.5vw, 24px); color: rgba(255,255,255,0.8); max-width: 700px; margin: 0 auto; line-height: 1.6;}
         
         .sb-reality-stats { display: flex; gap: 40px; margin-top: 48px; border-top: 1px solid var(--border-light); padding-top: 40px; flex-wrap: wrap;}
         .sb-r-stat { flex: 1; min-width: 200px; }
@@ -576,7 +618,7 @@
 
         .sb-what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px;}
         .sb-card { padding: 40px; background: var(--pink-bg); border: 1px solid rgba(212, 132, 154, 0.2); border-radius: var(--radius-md); transition: var(--transition-smooth); }
-        .sb-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-pink); border-color: var(--pink); }
+        .sb-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-pink); border-color: var(--pink); background: white;}
         .sb-card h3 { font-size: 20px; margin-bottom: 12px; }
         .sb-card p { font-size: 14.5px; color: var(--text-secondary); line-height: 1.7;}
 
@@ -584,8 +626,8 @@
         .sb-promise-item h4 { font-size: 22px; margin-bottom: 12px; color: var(--pink); }
         .sb-promise-item p { font-size: 15.5px; color: var(--text-secondary); line-height: 1.7; }
 
-        .sb-quote-section { background: var(--pink-surface); padding: 120px 0; text-align: center; }
-        .sb-huge-quote { font-family: 'Playfair Display', serif; font-size: clamp(24px, 3.5vw, 36px); color: var(--text-primary); max-width: 900px; margin: 0 auto; line-height: 1.6; font-style: italic;}
+        .sb-quote-section { background: var(--pink-surface); padding: 140px 0; text-align: center; position: relative;}
+        .sb-huge-quote { font-family: 'Playfair Display', serif; font-size: clamp(24px, 3.5vw, 36px); color: var(--text-primary); max-width: 900px; margin: 0 auto; line-height: 1.6; font-style: italic; position: relative; z-index: 2;}
 
         /* ==========================================================================
            10. PAGE STYLES - CONTACT
@@ -622,7 +664,7 @@
         .faq-answer { height: 0; overflow: hidden; transition: height 0.4s ease; }
         .faq-answer p { padding-bottom: 24px; color: var(--text-secondary); font-size: 15.5px; line-height: 1.7; }
         .faq-open .faq-icon::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
-        .faq-open .faq-answer { height: auto; } /* JS will handle explicit height for smooth animation if needed, auto works with simple CSS but abrupt */
+        .faq-open .faq-answer { height: auto; } 
 
         /* ==========================================================================
            11. RESPONSIVE BREAKPOINTS (Combined Overrides)
@@ -633,6 +675,7 @@
             .mission-vision-layout { grid-template-columns: 1fr; }
             .values-grid { grid-template-columns: 1fr 1fr; }
             .contact-layout { gap: 40px; }
+            .pos-bg-img-1, .pos-bg-img-2 { display: none; } /* Hide floating images on tablet/mobile */
         }
 
         @media (max-width: 768px) {
@@ -722,6 +765,8 @@
         <div id="home-view" class="page-view active">
             
             <section class="hero" id="hero">
+                <!-- Added Photographic Background Layer -->
+                <div class="hero-bg-image" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
                 <div class="grain-overlay"></div>
                 <div class="hero-gradient-orb hero-orb-1"></div>
                 <div class="hero-gradient-orb hero-orb-2"></div>
@@ -790,6 +835,10 @@
             </section>
 
             <section class="positioning-section">
+                <!-- Added floating background images for aesthetics -->
+                <img src="https://images.unsplash.com/photo-1434626881859-194d67b2b86f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Brand Strategy" class="pos-bg-img-1">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Brand Strategy" class="pos-bg-img-2">
+                
                 <div class="section-container">
                     <div class="positioning-content reveal">
                         <div class="pos-gold-line"></div>
@@ -863,6 +912,8 @@
             </section>
 
             <section class="stats-section">
+                <!-- Added Photographic Background Layer -->
+                <div class="stats-bg-img"></div>
                 <div class="grain-overlay"></div>
                 <div class="section-container">
                     <div class="stats-grid">
@@ -961,6 +1012,7 @@
                         </div>
                         <div class="sbp-visual reveal-right">
                             <div class="sbp-visual-container">
+                                <!-- Replaced empty circle with actual portrait photography -->
                                 <div class="sbp-circle sbp-circle-1"></div>
                                 <div class="sbp-circle sbp-circle-2"></div>
                                 <div class="sbp-circle sbp-circle-3"></div>
@@ -1044,6 +1096,8 @@
             </section>
 
             <section class="manifesto-section">
+                <!-- Added photographic background layer -->
+                <div class="manifesto-bg"></div>
                 <div class="grain-overlay"></div>
                 <div class="section-container">
                     <div class="manifesto-content reveal">
@@ -1065,6 +1119,8 @@
         <div id="about-view" class="page-view">
             
             <section class="hero hero-short">
+                <!-- Added subtle dark photo background -->
+                <div class="dark-bg-image" style="background-image: url('https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
                 <div class="grain-overlay"></div>
                 <div class="hero-gradient-orb hero-orb-1" style="left: -100px; right: auto;"></div>
                 <div class="hero-content">
@@ -1092,16 +1148,16 @@
                         <p>Today, we've helped 50+ brands transform from invisible to undeniable. From scattered to systematic. From posting randomly to growing strategically. And we're just getting started.</p>
                     </div>
                     <div class="reveal-right">
+                        <!-- Replaced abstract CSS container with a beautiful high-res team/workspace image -->
                         <div class="origin-visual">
-                            <div class="grain-overlay" style="opacity: 0.08;"></div>
-                            <div style="position: absolute; width: 200px; height: 200px; background: var(--primary-blue-glow); filter: blur(40px); border-radius: 50%; top: 20%; left: 20%;"></div>
-                            <div style="position: absolute; width: 150px; height: 150px; background: var(--gold-glow); filter: blur(30px); border-radius: 50%; bottom: 10%; right: 10%;"></div>
+                            <div class="origin-visual-overlay"></div>
                         </div>
                     </div>
                 </div>
             </section>
 
             <section class="dark-section" style="padding: 140px 0; position: relative;">
+                <div class="dark-bg-image" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'); opacity: 0.15;"></div>
                 <div class="grain-overlay"></div>
                 <div class="section-container mission-vision-layout">
                     <div class="mv-card mission reveal">
@@ -1153,6 +1209,24 @@
                     </div>
                 </div>
             </section>
+
+            <section class="final-cta-section">
+                <div class="grain-overlay"></div>
+                <div class="cta-glow-1"></div>
+                <div class="cta-glow-2"></div>
+                <div class="section-container">
+                    <div class="final-cta-content reveal">
+                        <span class="section-tag" style="color: var(--gold); justify-content: center;">Let's Begin</span>
+                        <h2 class="final-cta-title">Ready to Build a Brand<br>That <span class="title-accent">Stands Out</span><span style="color: var(--gold);">?</span></h2>
+                        <p class="final-cta-subtitle">No pitch decks. No pressure. Just a strategic conversation about your brand and where you want to take it. The brands that dominate tomorrow start building today.</p>
+                        <div class="final-cta-buttons">
+                            <a href="https://calendly.com" target="_blank" class="btn-primary">Book a Strategy Call <span class="btn-arrow">→</span></a>
+                            <a href="#contact" class="btn-secondary">Send Us a Message <span class="btn-arrow">→</span></a>
+                        </div>
+                        <p class="final-cta-note">Free 30-minute consultation · No obligations · Response within 24 hours</p>
+                    </div>
+                </div>
+            </section>
             
         </div>
 
@@ -1160,6 +1234,8 @@
         <div id="services-view" class="page-view">
             
             <section class="hero hero-short">
+                <!-- Added photographic background layer -->
+                <div class="dark-bg-image" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'); opacity: 0.15;"></div>
                 <div class="grain-overlay"></div>
                 <div class="hero-gradient-orb hero-orb-2" style="bottom: auto; top: -50px; right: 0; left: auto;"></div>
                 <div class="hero-content">
@@ -1274,12 +1350,32 @@
                 </div>
             </section>
 
+            <section class="final-cta-section">
+                <div class="grain-overlay"></div>
+                <div class="cta-glow-1"></div>
+                <div class="cta-glow-2"></div>
+                <div class="section-container">
+                    <div class="final-cta-content reveal">
+                        <span class="section-tag" style="color: var(--gold); justify-content: center;">Let's Begin</span>
+                        <h2 class="final-cta-title">Ready to Build a Brand<br>That <span class="title-accent">Stands Out</span><span style="color: var(--gold);">?</span></h2>
+                        <p class="final-cta-subtitle">No pitch decks. No pressure. Just a strategic conversation about your brand and where you want to take it. The brands that dominate tomorrow start building today.</p>
+                        <div class="final-cta-buttons">
+                            <a href="https://calendly.com" target="_blank" class="btn-primary">Book a Strategy Call <span class="btn-arrow">→</span></a>
+                            <a href="#contact" class="btn-secondary">Send Us a Message <span class="btn-arrow">→</span></a>
+                        </div>
+                        <p class="final-cta-note">Free 30-minute consultation · No obligations · Response within 24 hours</p>
+                    </div>
+                </div>
+            </section>
+
         </div>
 
         <!-- ================= SHE BUILDS PAGE ================= -->
         <div id="shebuilds-view" class="page-view">
             
             <section class="sb-hero">
+                <!-- Added photographic background layer tinted pink -->
+                <div class="dark-bg-image" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'); opacity: 0.15; mix-blend-mode: overlay;"></div>
                 <div class="grain-overlay"></div>
                 <div class="hero-gradient-orb hero-orb-1" style="background: radial-gradient(circle, rgba(212, 132, 154, 0.2) 0%, transparent 70%); top: -100px;"></div>
                 <div class="hero-gradient-orb hero-orb-3" style="background: radial-gradient(circle, rgba(200, 168, 78, 0.1) 0%, transparent 70%); bottom: -50px;"></div>
@@ -1432,6 +1528,8 @@
         <div id="contact-view" class="page-view">
             
             <section class="hero hero-short">
+                <!-- Added photographic background layer for contact page -->
+                <div class="dark-bg-image" style="background-image: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'); opacity: 0.2;"></div>
                 <div class="grain-overlay"></div>
                 <div class="hero-gradient-orb hero-orb-2" style="bottom: auto; top: 0; left: 0;"></div>
                 <div class="hero-content">
