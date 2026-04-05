@@ -395,8 +395,60 @@
         }
 
         /* ==========================================================================
-           6. PAGE STYLES - HOME
+           6. FORM STYLES & CONSULTATION SECTION
            ========================================================================== */
+        .book-consultation-section {
+            background: var(--off-white);
+            padding: 140px 0;
+            border-top: 1px solid var(--border-light);
+            position: relative;
+        }
+
+        /* Hide global consultation section when inside the dedicated contact view */
+        #contact-view.active ~ #book-consultation {
+            display: none;
+        }
+
+        .contact-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start; margin-top: 60px;}
+        .contact-info-box h3 { font-size: 28px; margin-bottom: 20px; }
+        .contact-info-box p { font-size: 16px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 32px; }
+        .contact-methods { list-style: none; margin-bottom: 48px;}
+        .contact-methods li { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; font-size: 15.5px; font-weight: 500;}
+        .contact-methods svg { color: var(--primary-blue); }
+        
+        .contact-expect { background: var(--white); padding: 32px; border-radius: var(--radius-md); border: 1px solid var(--border-light); box-shadow: var(--shadow-xs); }
+        .contact-expect h4 { font-size: 16px; margin-bottom: 16px; }
+        .contact-expect ul { list-style: none; }
+        .contact-expect li { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; display: flex; gap: 10px; align-items: center;}
+        .contact-expect li::before { content: '→'; color: var(--gold); font-weight: bold; }
+
+        .contact-form { background: var(--white); padding: 48px; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid var(--border-light); }
+        
+        .form-row { display: flex; gap: 24px; margin-bottom: 24px; }
+        .form-row .form-group { flex: 1; margin-bottom: 0; }
+        @media (max-width: 768px) {
+            .form-row { flex-direction: column; gap: 24px; margin-bottom: 0; }
+            .form-row .form-group { margin-bottom: 24px; }
+        }
+
+        .form-group { margin-bottom: 24px; }
+        .form-label { display: block; font-family: 'Alegreya SC', serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: var(--text-primary); }
+        .form-control { width: 100%; padding: 16px 20px; font-family: 'Alegreya SC', serif; font-size: 15px; border: 1px solid var(--border-light); border-radius: var(--radius-sm); background: var(--off-white); transition: var(--transition-fast); outline: none; color: var(--text-primary); appearance: none;}
+        .form-control:focus { border-color: var(--primary-blue); background: var(--white); box-shadow: 0 0 0 4px var(--primary-blue-light); }
+        select.form-control { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234A4A5A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
+        textarea.form-control { min-height: 140px; resize: vertical; }
+        
+        .form-note { font-size: 12px; color: var(--text-tertiary); margin-top: 24px; text-align: center; }
+        
+        .form-status { margin-top: 20px; font-family: 'Alegreya SC', serif; font-size: 15px; animation: fadeInPage 0.4s ease forwards; }
+        .success-message { color: var(--success); background: rgba(46, 204, 113, 0.1); padding: 14px 20px; border-radius: var(--radius-sm); border: 1px solid rgba(46, 204, 113, 0.3); font-weight: 500;}
+        .error-message { color: #E74C3C; background: rgba(231, 76, 60, 0.1); padding: 14px 20px; border-radius: var(--radius-sm); border: 1px solid rgba(231, 76, 60, 0.3); font-weight: 500;}
+
+        /* ==========================================================================
+           7. COMPONENT SPECIFIC STYLES 
+           ========================================================================== */
+        
+        /* Home Page */
         .hero {
             min-height: 100vh; display: flex; align-items: center; justify-content: center;
             background: linear-gradient(145deg, #050510 0%, #0A0E24 30%, #101540 55%, #0A0A1A 80%, #050510 100%);
@@ -444,7 +496,7 @@
         @keyframes scrollDown { 0% { top: -100%; } 100% { top: 100%; } }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Marquee Section */
+        /* General Sections */
         .marquee-section { background: var(--dark-bg); padding: 22px 0; border-top: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04); overflow: hidden; }
         .marquee-track { overflow: hidden; white-space: nowrap; }
         .marquee-content { display: inline-flex; align-items: center; gap: 36px; animation: marqueeScroll 25s linear infinite; }
@@ -452,7 +504,6 @@
         .marquee-separator { color: var(--gold); font-size: 8px; opacity: 0.5; }
         @keyframes marqueeScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* Positioning Section */
         .positioning-section { background: var(--off-white); padding: 140px 24px; position: relative; overflow: hidden;}
         .pos-bg-img-1 { position: absolute; width: 300px; height: 400px; object-fit: cover; border-radius: var(--radius-lg); opacity: 0.15; left: -100px; top: 10%; transform: rotate(-5deg); pointer-events: none;}
         .pos-bg-img-2 { position: absolute; width: 350px; height: 250px; object-fit: cover; border-radius: var(--radius-lg); opacity: 0.15; right: -80px; bottom: 10%; transform: rotate(8deg); pointer-events: none;}
@@ -462,7 +513,6 @@
         .positioning-quote { font-family: 'Alegreya SC', serif; font-style: italic; font-size: clamp(22px, 3vw, 32px); color: var(--text-primary); line-height: 1.7; max-width: 750px; margin: 0 auto; }
         .positioning-quote em { color: var(--primary-blue); font-style: italic; }
 
-        /* What We Do Grid */
         .what-we-do-section { background: var(--white); padding: 140px 0; }
         .wwd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 64px;}
         .wwd-card { background: var(--off-white); padding: 44px 36px 40px; border-radius: var(--radius-md); border: 1px solid var(--border-light); position: relative; overflow: hidden; transition: var(--transition-smooth); }
@@ -477,7 +527,6 @@
         .wwd-card-bottom-line { position: absolute; bottom: 0; left: 0; width: 0; height: 3px; background: linear-gradient(90deg, var(--primary-blue), var(--gold)); transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
         .wwd-card:hover .wwd-card-bottom-line { width: 100%; }
 
-        /* Stats Strip */
         .stats-section { background: var(--dark-bg-secondary); padding: 120px 0; position: relative; overflow: hidden; }
         .stats-bg-img {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -490,7 +539,6 @@
         .stat-label { display: block; font-family: 'Alegreya SC', serif; font-weight: 600; font-size: 14px; color: rgba(255,255,255,0.7); margin-top: 8px; letter-spacing: 0.3px; }
         .stat-desc { display: block; font-family: 'Alegreya SC', serif; font-weight: 400; font-size: 12.5px; color: rgba(255,255,255,0.3); margin-top: 4px; }
 
-        /* USP Layout */
         .usp-section { background: var(--cream); padding: 140px 0; }
         .usp-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start; }
         .usp-left { position: sticky; top: 120px; }
@@ -500,7 +548,6 @@
         .usp-text h4 { font-family: 'Alegreya SC', serif; font-weight: 700; font-size: 17px; color: var(--text-primary); margin-bottom: 8px; }
         .usp-text p { font-size: 14.5px; color: var(--text-secondary); line-height: 1.7; }
 
-        /* She Builds Preview */
         .she-builds-preview { background: linear-gradient(135deg, var(--pink-surface) 0%, var(--white) 50%, var(--pink-surface) 100%); padding: 140px 0; overflow: hidden; }
         .sbp-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: center; }
         .sbp-title { font-family: 'Kingred Modern', serif; font-weight: 800; font-size: clamp(40px, 5.5vw, 64px); color: var(--text-primary); letter-spacing: -2px; margin-bottom: 24px; }
@@ -524,7 +571,6 @@
         .sbp-quote-card { position: relative; z-index: 2; background: var(--white); padding: 32px 40px; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); border: 1px solid var(--pink-light); top: 60px; right: -20px;}
         .sbp-quote-card p { font-family: 'Alegreya SC', serif; font-style: italic; font-size: 20px; color: var(--pink); text-align: center; }
 
-        /* Process Timeline */
         .process-section { background: var(--white); padding: 140px 0; }
         .process-timeline { position: relative; max-width: 700px; margin: 0 auto; }
         .process-line { position: absolute; left: 24px; top: 0; width: 1.5px; height: 100%; background: linear-gradient(to bottom, var(--gold), var(--border-light)); }
@@ -537,7 +583,6 @@
         .step-tags { display: flex; flex-wrap: wrap; gap: 8px; }
         .step-tags span { font-size: 11.5px; font-family: 'Alegreya SC', serif; font-weight: 500; color: var(--primary-blue); background: var(--primary-blue-light); padding: 6px 14px; border-radius: var(--radius-full); letter-spacing: 0.3px; }
 
-        /* Brand Manifesto */
         .manifesto-section { background: var(--dark-bg); padding: 160px 0; position: relative; overflow: hidden; text-align: center; }
         .manifesto-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -550,7 +595,6 @@
         .manifesto-text em { color: var(--gold); font-style: italic; }
         .manifesto-closer { font-family: 'Alegreya SC', serif !important; font-weight: 700 !important; font-size: clamp(22px, 3vw, 32px) !important; color: var(--white) !important; margin-top: 48px !important; font-style: normal !important; }
 
-        /* Final CTA */
         .final-cta-section { background: linear-gradient(145deg, #050510 0%, #0C1030 35%, #141845 60%, #080815 100%); padding: 160px 0; text-align: center; position: relative; overflow: hidden; }
         .cta-glow-1 { position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, var(--primary-blue-glow), transparent 70%); top: -150px; left: -100px; filter: blur(60px); }
         .cta-glow-2 { position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, var(--gold-glow), transparent 70%); bottom: -100px; right: -100px; filter: blur(60px); }
@@ -560,9 +604,6 @@
         .final-cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px; }
         .final-cta-note { font-family: 'Alegreya SC', serif; font-size: 13px; color: var(--text-on-dark-subtle); letter-spacing: 0.5px; }
 
-        /* ==========================================================================
-           7. PAGE STYLES - ABOUT
-           ========================================================================== */
         .origin-layout { display: grid; grid-template-columns: 55% 45%; gap: 60px; align-items: center;}
         .origin-text p { margin-bottom: 24px; color: var(--text-secondary); }
         .origin-quote { font-family: 'Alegreya SC', serif; font-style: italic; font-size: 24px; color: var(--primary-blue); border-left: 4px solid var(--gold); padding-left: 24px; margin: 40px 0; }
@@ -591,9 +632,6 @@
         .value-card h4 { font-size: 20px; margin-bottom: 12px; color: var(--text-primary);}
         .value-card p { font-size: 14.5px; color: var(--text-secondary); line-height: 1.7; }
 
-        /* ==========================================================================
-           8. PAGE STYLES - SERVICES
-           ========================================================================== */
         .philosophy-strip { background: var(--off-white); padding: 100px 24px; text-align: center; }
         .philosophy-quote { font-family: 'Alegreya SC', serif; font-style: italic; font-size: clamp(22px, 3vw, 32px); color: var(--text-primary); max-width: 800px; margin: 0 auto; line-height: 1.6;}
         
@@ -610,9 +648,6 @@
         .service-include-item { display: flex; align-items: flex-start; gap: 12px; font-size: 14.5px; color: var(--text-secondary); }
         .service-include-item svg { flex-shrink: 0; margin-top: 3px; color: var(--gold); }
 
-        /* ==========================================================================
-           9. PAGE STYLES - SHE BUILDS
-           ========================================================================== */
         .sb-hero { background: linear-gradient(135deg, #1A0A10 0%, #2A1520 40%, #1A0A10 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; text-align: center;}
         .sb-hero-title { font-family: 'Kingred Modern', serif; font-weight: 800; font-size: clamp(56px, 10vw, 110px); color: white; letter-spacing: -4px; margin-bottom: 24px;}
         .sb-hero-subtitle { font-family: 'Alegreya SC', serif; font-style: italic; font-size: clamp(18px, 2.5vw, 24px); color: rgba(255,255,255,0.8); max-width: 700px; margin: 0 auto; line-height: 1.6;}
@@ -639,30 +674,6 @@
         .sb-quote-section { background: var(--pink-surface); padding: 140px 0; text-align: center; position: relative;}
         .sb-huge-quote { font-family: 'Alegreya SC', serif; font-size: clamp(24px, 3.5vw, 36px); color: var(--text-primary); max-width: 900px; margin: 0 auto; line-height: 1.6; font-style: italic; position: relative; z-index: 2;}
 
-        /* ==========================================================================
-           10. PAGE STYLES - CONTACT
-           ========================================================================== */
-        .contact-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start; margin-top: 60px;}
-        .contact-info-box h3 { font-size: 28px; margin-bottom: 20px; }
-        .contact-info-box p { font-size: 16px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 32px; }
-        .contact-methods { list-style: none; margin-bottom: 48px;}
-        .contact-methods li { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; font-size: 15.5px; font-weight: 500;}
-        .contact-methods svg { color: var(--primary-blue); }
-        
-        .contact-expect { background: var(--off-white); padding: 32px; border-radius: var(--radius-md); border: 1px solid var(--border-light); }
-        .contact-expect h4 { font-size: 16px; margin-bottom: 16px; }
-        .contact-expect ul { list-style: none; }
-        .contact-expect li { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; display: flex; gap: 10px; align-items: center;}
-        .contact-expect li::before { content: '→'; color: var(--gold); }
-
-        .contact-form { background: var(--white); padding: 48px; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid var(--border-light); }
-        .form-group { margin-bottom: 24px; }
-        .form-label { display: block; font-family: 'Alegreya SC', serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: var(--text-primary); }
-        .form-control { width: 100%; padding: 16px 20px; font-family: 'Alegreya SC', serif; font-size: 15px; border: 1px solid var(--border-light); border-radius: var(--radius-sm); background: var(--off-white); transition: var(--transition-fast); outline: none; color: var(--text-primary);}
-        .form-control:focus { border-color: var(--primary-blue); background: var(--white); box-shadow: 0 0 0 4px var(--primary-blue-light); }
-        textarea.form-control { min-height: 140px; resize: vertical; }
-        .form-note { font-size: 12px; color: var(--text-tertiary); margin-top: 16px; text-align: center; }
-
         .faq-section { margin-top: 120px; max-width: 800px; margin-left: auto; margin-right: auto; padding-bottom: 140px;}
         .faq-item { border-bottom: 1px solid var(--border-light); }
         .faq-question { padding: 24px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: 'Alegreya SC', serif; font-weight: 700; font-size: 18px; color: var(--text-primary); transition: var(--transition-fast); }
@@ -677,7 +688,7 @@
         .faq-open .faq-answer { height: auto; } 
 
         /* ==========================================================================
-           11. RESPONSIVE BREAKPOINTS (Combined Overrides)
+           8. RESPONSIVE BREAKPOINTS (Combined Overrides)
            ========================================================================== */
         @media (max-width: 1024px) {
             .wwd-grid { grid-template-columns: 1fr 1fr; }
@@ -743,7 +754,7 @@
                 <li><a href="about.html" class="nav-link">About</a></li>
                 <li><a href="services.html" class="nav-link">Services</a></li>
                 <li><a href="shebuilds.html" class="nav-link she-builds-link">She Builds</a></li>
-                <li><a href="https://calendly.com" target="_blank" class="nav-cta">Book a Consultation</a></li>
+                <li><a href="#book-consultation" class="nav-cta">Book a Consultation</a></li>
             </ul>
             <div class="hamburger" aria-label="Menu toggle">
                 <span></span><span></span><span></span>
@@ -759,7 +770,7 @@
             <a href="services.html" class="mobile-link">Services</a>
             <a href="shebuilds.html" class="mobile-link she-builds-link">She Builds</a>
             <a href="contact.html" class="mobile-link">Contact</a>
-            <a href="https://calendly.com" target="_blank" class="btn-primary mobile-cta">Book a Consultation <span class="btn-arrow">→</span></a>
+            <a href="#book-consultation" class="btn-primary mobile-cta">Book a Consultation <span class="btn-arrow">→</span></a>
             <div class="mobile-menu-footer">
                 <a href="#">Instagram</a>
                 <a href="#">LinkedIn</a>
@@ -775,7 +786,6 @@
         <div id="home-view" class="page-view active">
             
             <section class="hero" id="hero">
-                <!-- Added Photographic Background Layer -->
                 <div class="hero-bg-image" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
                 <div class="grain-overlay"></div>
                 <div class="hero-gradient-orb hero-orb-1"></div>
@@ -795,7 +805,7 @@
                     </h1>
                     <p class="hero-subtitle">Strategy. Content. Systems. We architect complete brand ecosystems that turn invisible businesses into industry authorities. No templates. No shortcuts. Just strategic creative firepower.</p>
                     <div class="hero-cta-group">
-                        <a href="https://calendly.com" target="_blank" class="btn-primary">Book a Consultation <span class="btn-arrow">→</span></a>
+                        <a href="#book-consultation" class="btn-primary">Book a Consultation <span class="btn-arrow">→</span></a>
                         <a href="services.html" class="btn-secondary">Explore Services <span class="btn-arrow">→</span></a>
                     </div>
                     <div class="hero-trust-bar">
@@ -832,7 +842,6 @@
                         <span class="marquee-item">AI-Powered Growth</span><span class="marquee-separator">✦</span>
                         <span class="marquee-item">Systems & Automation</span><span class="marquee-separator">✦</span>
                         <span class="marquee-item">She Builds</span><span class="marquee-separator">✦</span>
-                        <!-- Duplicated for Loop -->
                         <span class="marquee-item">Brand Strategy</span><span class="marquee-separator">✦</span>
                         <span class="marquee-item">Content Creation</span><span class="marquee-separator">✦</span>
                         <span class="marquee-item">Social Media</span><span class="marquee-separator">✦</span>
@@ -845,7 +854,6 @@
             </section>
 
             <section class="positioning-section">
-                <!-- Added floating background images for aesthetics -->
                 <img src="https://images.unsplash.com/photo-1434626881859-194d67b2b86f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Brand Strategy" class="pos-bg-img-1">
                 <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Brand Strategy" class="pos-bg-img-2">
                 
@@ -922,7 +930,6 @@
             </section>
 
             <section class="stats-section">
-                <!-- Added Photographic Background Layer -->
                 <div class="stats-bg-img"></div>
                 <div class="grain-overlay"></div>
                 <div class="section-container">
@@ -966,7 +973,7 @@
                                 </div>
                                 <div class="usp-text">
                                     <h4>AI Intelligence × Human Intuition</h4>
-                                    <p>We leverage cutting-edge AI tools to analyze data, optimize content, and identify opportunities — then layer in the human creativity, emotional intelligence, and brand intuition that no algorithm can replicate. The best of both worlds.</p>
+                                    <p>We leverage cutting-edge AI tools to analyze data, optimize content, and identify opportunities — then layer in the human creativity, emotional intelligence, and brand intuition that no algorithm can replicate.</p>
                                 </div>
                             </div>
                             <div class="usp-item reveal reveal-delay-2">
@@ -975,7 +982,7 @@
                                 </div>
                                 <div class="usp-text">
                                     <h4>No Random Posting — Everything Has Purpose</h4>
-                                    <p>Every single piece of content we create ties back to your brand strategy and growth objectives. We don't fill feeds with filler — we build narratives that convert attention into revenue. Each post is a chess move, not a dice roll.</p>
+                                    <p>Every piece of content we create ties back to your brand strategy and growth objectives. We build narratives that convert attention into revenue. Each post is a chess move, not a dice roll.</p>
                                 </div>
                             </div>
                             <div class="usp-item reveal reveal-delay-3">
@@ -984,7 +991,7 @@
                                 </div>
                                 <div class="usp-text">
                                     <h4>Brand-First, Not Trend-Chasing</h4>
-                                    <p>Trends come and go. Brand identity compounds forever. We build for the long game — establishing your brand's unique position, voice, and visual language — while staying culturally aware and relevant. Substance over virality.</p>
+                                    <p>Trends come and go. Brand identity compounds forever. We build for the long game — establishing your brand's unique position, voice, and visual language while staying culturally relevant.</p>
                                 </div>
                             </div>
                             <div class="usp-item reveal reveal-delay-4">
@@ -992,8 +999,8 @@
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                                 </div>
                                 <div class="usp-text">
-                                    <h4>Growth Systems That Compound Over Time</h4>
-                                    <p>We don't just create content and disappear. We build systems — automations, workflows, processes, and documentation — that make your brand operations more efficient month after month. Growth that accelerates, not plateaus.</p>
+                                    <h4>Growth Systems That Compound</h4>
+                                    <p>We don't just create content and disappear. We build systems — automations, workflows, and documentation — that make your brand operations more efficient month after month.</p>
                                 </div>
                             </div>
                         </div>
@@ -1022,7 +1029,6 @@
                         </div>
                         <div class="sbp-visual reveal-right">
                             <div class="sbp-visual-container">
-                                <!-- Replaced empty circle with actual portrait photography -->
                                 <div class="sbp-circle sbp-circle-1"></div>
                                 <div class="sbp-circle sbp-circle-2"></div>
                                 <div class="sbp-circle sbp-circle-3"></div>
@@ -1106,7 +1112,6 @@
             </section>
 
             <section class="manifesto-section">
-                <!-- Added photographic background layer -->
                 <div class="manifesto-bg"></div>
                 <div class="grain-overlay"></div>
                 <div class="section-container">
@@ -1123,13 +1128,30 @@
                 </div>
             </section>
 
+            <section class="final-cta-section">
+                <div class="grain-overlay"></div>
+                <div class="cta-glow-1"></div>
+                <div class="cta-glow-2"></div>
+                <div class="section-container">
+                    <div class="final-cta-content reveal">
+                        <span class="section-tag" style="color: var(--gold); justify-content: center;">Let's Begin</span>
+                        <h2 class="final-cta-title">Ready to Build a Brand<br>That <span class="title-accent">Stands Out</span><span style="color: var(--gold);">?</span></h2>
+                        <p class="final-cta-subtitle">No pitch decks. No pressure. Just a strategic conversation about your brand and where you want to take it. The brands that dominate tomorrow start building today.</p>
+                        <div class="final-cta-buttons">
+                            <a href="#book-consultation" class="btn-primary">Book a Strategy Call <span class="btn-arrow">→</span></a>
+                            <a href="contact.html" class="btn-secondary">Send Us a Message <span class="btn-arrow">→</span></a>
+                        </div>
+                        <p class="final-cta-note">Free 30-minute consultation · No obligations · Response within 24 hours</p>
+                    </div>
+                </div>
+            </section>
+
         </div>
 
         <!-- ================= ABOUT PAGE ================= -->
         <div id="about-view" class="page-view">
             
             <section class="hero hero-short">
-                <!-- Added subtle dark photo background -->
                 <div class="dark-bg-image" style="background-image: url('https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
                 <div class="grain-overlay"></div>
                 <div class="hero-gradient-orb hero-orb-1" style="left: -100px; right: auto;"></div>
@@ -1158,7 +1180,6 @@
                         <p>Today, we've helped 50+ brands transform from invisible to undeniable. From scattered to systematic. From posting randomly to growing strategically. And we're just getting started.</p>
                     </div>
                     <div class="reveal-right">
-                        <!-- Replaced abstract CSS container with a beautiful high-res team/workspace image -->
                         <div class="origin-visual">
                             <div class="origin-visual-overlay"></div>
                         </div>
@@ -1230,8 +1251,8 @@
                         <h2 class="final-cta-title">Ready to Build a Brand<br>That <span class="title-accent">Stands Out</span><span style="color: var(--gold);">?</span></h2>
                         <p class="final-cta-subtitle">No pitch decks. No pressure. Just a strategic conversation about your brand and where you want to take it. The brands that dominate tomorrow start building today.</p>
                         <div class="final-cta-buttons">
-                            <a href="https://calendly.com" target="_blank" class="btn-primary">Book a Strategy Call <span class="btn-arrow">→</span></a>
-                            <a href="#contact" class="btn-secondary">Send Us a Message <span class="btn-arrow">→</span></a>
+                            <a href="#book-consultation" class="btn-primary">Book a Strategy Call <span class="btn-arrow">→</span></a>
+                            <a href="contact.html" class="btn-secondary">Send Us a Message <span class="btn-arrow">→</span></a>
                         </div>
                         <p class="final-cta-note">Free 30-minute consultation · No obligations · Response within 24 hours</p>
                     </div>
@@ -1244,7 +1265,6 @@
         <div id="services-view" class="page-view">
             
             <section class="hero hero-short">
-                <!-- Added photographic background layer -->
                 <div class="dark-bg-image" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'); opacity: 0.15;"></div>
                 <div class="grain-overlay"></div>
                 <div class="hero-gradient-orb hero-orb-2" style="bottom: auto; top: -50px; right: 0; left: auto;"></div>
@@ -1290,7 +1310,7 @@
                             <div class="service-include-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Growth tracking with actionable recommendations</div>
                         </div>
                     </div>
-                    <a href="https://calendly.com" target="_blank" class="btn-primary reveal">Book a Consultation <span class="btn-arrow">→</span></a>
+                    <a href="#book-consultation" class="btn-primary reveal">Book a Consultation <span class="btn-arrow">→</span></a>
                 </div>
             </section>
 
@@ -1319,7 +1339,7 @@
                             <div class="service-include-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Quarterly brand refresh & evolution planning</div>
                         </div>
                     </div>
-                    <a href="https://calendly.com" target="_blank" class="btn-secondary-dark reveal">Book a Consultation <span class="btn-arrow">→</span></a>
+                    <a href="#book-consultation" class="btn-secondary-dark reveal">Book a Consultation <span class="btn-arrow">→</span></a>
                 </div>
             </section>
 
@@ -1348,7 +1368,7 @@
                             <div class="service-include-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Quarterly systems review & optimization</div>
                         </div>
                     </div>
-                    <a href="https://calendly.com" target="_blank" class="btn-primary reveal">Book a Consultation <span class="btn-arrow">→</span></a>
+                    <a href="#book-consultation" class="btn-primary reveal">Book a Consultation <span class="btn-arrow">→</span></a>
                 </div>
             </section>
 
@@ -1356,7 +1376,7 @@
                 <div class="reveal">
                     <h2 class="section-title">Not Sure Where to Start?</h2>
                     <p class="section-subtitle" style="margin: 0 auto 32px;">Every great brand starts with a conversation. Book a free 30-minute strategy call and we'll map out exactly what your brand needs — no strings attached.</p>
-                    <a href="https://calendly.com" target="_blank" class="btn-primary">Book a Strategy Call <span class="btn-arrow">→</span></a>
+                    <a href="#book-consultation" class="btn-primary">Book a Strategy Call <span class="btn-arrow">→</span></a>
                 </div>
             </section>
 
@@ -1370,8 +1390,8 @@
                         <h2 class="final-cta-title">Ready to Build a Brand<br>That <span class="title-accent">Stands Out</span><span style="color: var(--gold);">?</span></h2>
                         <p class="final-cta-subtitle">No pitch decks. No pressure. Just a strategic conversation about your brand and where you want to take it. The brands that dominate tomorrow start building today.</p>
                         <div class="final-cta-buttons">
-                            <a href="https://calendly.com" target="_blank" class="btn-primary">Book a Strategy Call <span class="btn-arrow">→</span></a>
-                            <a href="#contact" class="btn-secondary">Send Us a Message <span class="btn-arrow">→</span></a>
+                            <a href="#book-consultation" class="btn-primary">Book a Strategy Call <span class="btn-arrow">→</span></a>
+                            <a href="contact.html" class="btn-secondary">Send Us a Message <span class="btn-arrow">→</span></a>
                         </div>
                         <p class="final-cta-note">Free 30-minute consultation · No obligations · Response within 24 hours</p>
                     </div>
@@ -1384,7 +1404,6 @@
         <div id="shebuilds-view" class="page-view">
             
             <section class="sb-hero">
-                <!-- Added photographic background layer tinted pink -->
                 <div class="dark-bg-image" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'); opacity: 0.15; mix-blend-mode: overlay;"></div>
                 <div class="grain-overlay"></div>
                 <div class="hero-gradient-orb hero-orb-1" style="background: radial-gradient(circle, rgba(212, 132, 154, 0.2) 0%, transparent 70%); top: -100px;"></div>
@@ -1525,8 +1544,8 @@
                     <div class="final-cta-content reveal">
                         <h2 class="final-cta-title">Your Story Deserves<br>to Be Heard.</h2>
                         <div class="final-cta-buttons" style="margin-top: 40px;">
-                            <a href="#contact" class="btn-pink">Apply for She Builds <span class="btn-arrow">→</span></a>
-                            <a href="https://calendly.com" target="_blank" class="btn-secondary">Book a Consultation <span class="btn-arrow">→</span></a>
+                            <a href="#book-consultation" class="btn-pink">Apply for She Builds <span class="btn-arrow">→</span></a>
+                            <a href="#book-consultation" class="btn-secondary">Book a Consultation <span class="btn-arrow">→</span></a>
                         </div>
                     </div>
                 </div>
@@ -1538,7 +1557,6 @@
         <div id="contact-view" class="page-view">
             
             <section class="hero hero-short">
-                <!-- Added photographic background layer for contact page -->
                 <div class="dark-bg-image" style="background-image: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'); opacity: 0.2;"></div>
                 <div class="grain-overlay"></div>
                 <div class="hero-gradient-orb hero-orb-2" style="bottom: auto; top: 0; left: 0;"></div>
@@ -1568,7 +1586,7 @@
                         <div class="contact-expect">
                             <h4 class="syne-font">What to Expect:</h4>
                             <ul>
-                                <li>A response within 24 hours (usually faster)</li>
+                                <li>A prompt response within 24 hours</li>
                                 <li>An honest assessment of how we can help</li>
                                 <li>Zero pressure — just strategy</li>
                             </ul>
@@ -1576,36 +1594,42 @@
                     </div>
 
                     <div class="reveal-right">
-                        <!-- Update Action with actual Formspree or backend URL -->
-                        <form class="contact-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Form logic goes here (e.g. Formspree)!');">
-                            <div class="form-group">
-                                <label class="form-label" for="name">Name</label>
-                                <input class="form-control" type="text" id="name" name="name" placeholder="Your full name" required>
+                        <!-- Upgraded Formspree Form Integration for dedicated Contact Page -->
+                        <form id="page-contact-form" class="contact-form" action="https://formspree.io/f/xaqllzpz" method="POST">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="p-name">Full Name <span style="color:var(--pink)">*</span></label>
+                                    <input class="form-control" type="text" id="p-name" name="name" placeholder="John Doe" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="p-email">Email Address <span style="color:var(--pink)">*</span></label>
+                                    <input class="form-control" type="email" id="p-email" name="email" placeholder="john@example.com" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="p-phone">Phone Number</label>
+                                    <input class="form-control" type="tel" id="p-phone" name="phone" placeholder="+1 (555) 000-0000">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="p-subject">Subject</label>
+                                    <select class="form-control" id="p-subject" name="subject">
+                                        <option value="Brand Strategy">Brand Strategy</option>
+                                        <option value="Content Creation">Content Creation</option>
+                                        <option value="Social Media Management">Social Media Management</option>
+                                        <option value="She Builds Initiative">She Builds Initiative</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label class="form-label" for="email">Email</label>
-                                <input class="form-control" type="email" id="email" name="email" placeholder="your@email.com" required>
+                                <label class="form-label" for="p-message">Message <span style="color:var(--pink)">*</span></label>
+                                <textarea class="form-control" id="p-message" name="message" placeholder="Describe your goals, challenges, or vision..." required></textarea>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label" for="business">Business Name</label>
-                                <input class="form-control" type="text" id="business" name="business" placeholder="Your brand or company name">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="source">How did you hear about us?</label>
-                                <select class="form-control" id="source" name="source">
-                                    <option value="" disabled selected>Select an option</option>
-                                    <option value="instagram">Instagram</option>
-                                    <option value="linkedin">LinkedIn</option>
-                                    <option value="referral">Referral</option>
-                                    <option value="google">Google</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="project">Tell us about your project</label>
-                                <textarea class="form-control" id="project" name="project" placeholder="Describe your goals, challenges, or vision..." required></textarea>
-                            </div>
-                            <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">Submit Your Inquiry <span class="btn-arrow">→</span></button>
+                            <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;" id="p-submitBtn">
+                                <span class="btn-text">Send Message</span> <span class="btn-arrow">→</span>
+                            </button>
+                            <div id="p-form-status" class="form-status"></div>
                             <p class="form-note">Your information is safe with us. We never share or sell client data.</p>
                         </form>
                     </div>
@@ -1642,6 +1666,70 @@
             </section>
 
         </div>
+
+        <!-- ================= GLOBAL CONSULTATION SECTION ================= -->
+        <!-- This section is placed outside the .page-view elements so it is accessible from everywhere. 
+             It is hidden strictly when the `#contact-view` is active to prevent duplicate forms. -->
+        <section id="book-consultation" class="book-consultation-section">
+            <div class="section-container">
+                <div class="contact-layout">
+                    <div class="contact-info-box reveal">
+                        <span class="section-tag">Take the Next Step</span>
+                        <h2 class="section-title">Book a <span class="highlight">Consultation</span></h2>
+                        <p>Ready to build a brand that doesn't get ignored? Fill out the form below to schedule your free 30-minute strategy session. We'll get back to you within 24 hours.</p>
+                        <div class="contact-expect" style="margin-top: 32px;">
+                            <h4 class="syne-font">What to Expect:</h4>
+                            <ul>
+                                <li>A prompt response within 24 hours</li>
+                                <li>An honest assessment of how we can help</li>
+                                <li>Zero pressure — just strategy</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="reveal">
+                        <!-- Upgraded Formspree Form Integration -->
+                        <form id="global-consultation-form" class="contact-form" action="https://formspree.io/f/xaqllzpz" method="POST">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="g-name">Full Name <span style="color:var(--pink)">*</span></label>
+                                    <input class="form-control" type="text" id="g-name" name="name" placeholder="John Doe" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="g-email">Email Address <span style="color:var(--pink)">*</span></label>
+                                    <input class="form-control" type="email" id="g-email" name="email" placeholder="john@example.com" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="g-phone">Phone Number</label>
+                                    <input class="form-control" type="tel" id="g-phone" name="phone" placeholder="+1 (555) 000-0000">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="g-subject">Subject</label>
+                                    <select class="form-control" id="g-subject" name="subject">
+                                        <option value="Brand Strategy">Brand Strategy</option>
+                                        <option value="Content Creation">Content Creation</option>
+                                        <option value="Social Media Management">Social Media Management</option>
+                                        <option value="She Builds Initiative">She Builds Initiative</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="g-message">Message <span style="color:var(--pink)">*</span></label>
+                                <textarea class="form-control" id="g-message" name="message" placeholder="Describe your goals, challenges, or vision..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;" id="g-submitBtn">
+                                <span class="btn-text">Send Message</span> <span class="btn-arrow">→</span>
+                            </button>
+                            <div id="g-form-status" class="form-status"></div>
+                            <p class="form-note">Your information is safe with us. We never share or sell client data.</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
     </main>
 
     <!-- Footer -->
@@ -1677,7 +1765,7 @@
                 <div class="footer-contact">
                     <h4 class="footer-heading">Get in Touch</h4>
                     <a href="mailto:hello@msuvach.com">hello@msuvach.com</a>
-                    <a href="https://calendly.com" target="_blank">Book a Consultation</a>
+                    <a href="#book-consultation">Book a Consultation</a>
                     <p class="footer-location">Building brands worldwide</p>
                 </div>
             </div>
@@ -1696,6 +1784,12 @@
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.querySelector('.page-loader').classList.add('loaded');
+                
+                // If URL was loaded with the hash, scroll to it smoothly
+                if(window.location.hash === '#book-consultation') {
+                    const target = document.querySelector('#book-consultation');
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             }, 1600);
         });
 
@@ -1740,18 +1834,21 @@
 
         function initReveals() {
             const activeView = document.querySelector('.page-view.active');
-            if(activeView) {
-                const elements = activeView.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
-                elements.forEach(el => {
-                    el.classList.remove('revealed');
-                    revealObserver.observe(el);
-                });
-            }
+            // Re-bind global section reveal too
+            const elements = document.querySelectorAll('.page-view.active .reveal, .page-view.active .reveal-left, .page-view.active .reveal-right, .page-view.active .reveal-scale, #book-consultation .reveal, #book-consultation .reveal-left, #book-consultation .reveal-right');
+            
+            elements.forEach(el => {
+                el.classList.remove('revealed');
+                revealObserver.observe(el);
+            });
         }
 
         // SPA Router Logic
         function handleRoute() {
             let hash = window.location.hash || '#home';
+            
+            // Bypass view routing logic for our smooth scroll consultation hashes
+            if (hash === '#book-consultation') return;
             
             // Hide all views
             document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
@@ -1873,11 +1970,28 @@
         // Smooth scrolling for anchor links within same view
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             const href = anchor.getAttribute('href');
+            // We intercept links that are purely for scrolling.
             if(href !== '#home' && href !== '#about' && href !== '#services' && href !== '#shebuilds' && href !== '#contact') {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    
+                    // Specific logic for the consultation button depending on the current page active view
+                    if (href === '#book-consultation') {
+                        const contactView = document.getElementById('contact-view');
+                        if (contactView && contactView.classList.contains('active')) {
+                            // If they are inside the contact view, scroll to the page-specific embedded form instead
+                            const localTarget = document.getElementById('page-contact-form');
+                            if (localTarget) localTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        } else {
+                            // Otherwise, scroll down to the global footer-level form section
+                            const globalTarget = document.querySelector(href);
+                            if (globalTarget) globalTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    } else {
+                        // Standard smooth scroll
+                        const target = document.querySelector(href);
+                        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
                 });
             }
         });
@@ -1892,6 +2006,58 @@
                 });
             });
         }
+
+        // ==========================================================================
+        // FORMSPREE AJAX INTEGRATION (Handles both Global and Page Specific Forms)
+        // ==========================================================================
+        function setupFormspree(formId, statusId, submitBtnId) {
+            const form = document.getElementById(formId);
+            const status = document.getElementById(statusId);
+            const submitBtn = document.getElementById(submitBtnId);
+            if (!form) return;
+
+            const btnText = submitBtn.querySelector('.btn-text');
+            const originalText = btnText.textContent;
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                btnText.textContent = 'Sending...';
+                submitBtn.style.opacity = '0.7';
+                submitBtn.style.pointerEvents = 'none';
+                status.innerHTML = '';
+
+                const data = new FormData(form);
+                try {
+                    const response = await fetch(form.action, {
+                        method: form.method,
+                        body: data,
+                        headers: { 'Accept': 'application/json' }
+                    });
+
+                    if (response.ok) {
+                        status.innerHTML = '<div class="success-message">Thank you! Your message has been successfully sent. We will be in touch shortly.</div>';
+                        form.reset();
+                    } else {
+                        const responseData = await response.json();
+                        if (Object.hasOwn(responseData, 'errors')) {
+                            status.innerHTML = '<div class="error-message">' + responseData.errors.map(error => error.message).join(', ') + '</div>';
+                        } else {
+                            status.innerHTML = '<div class="error-message">Oops! There was a problem submitting your form.</div>';
+                        }
+                    }
+                } catch (error) {
+                    status.innerHTML = '<div class="error-message">Oops! There was a network problem. Please try again.</div>';
+                } finally {
+                    btnText.textContent = originalText;
+                    submitBtn.style.opacity = '1';
+                    submitBtn.style.pointerEvents = 'auto';
+                }
+            });
+        }
+
+        // Initialize Formspree logic for both possible forms in the DOM
+        setupFormspree('global-consultation-form', 'g-form-status', 'g-submitBtn');
+        setupFormspree('page-contact-form', 'p-form-status', 'p-submitBtn');
 
         // Initialize SPA
         handleRoute();
